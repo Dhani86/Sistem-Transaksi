@@ -54,7 +54,7 @@ public class Main {
         while (true) {
             System.out.print("Masukkan uang yang dibayarkan (Rp): ");
             jumlahBayar = scanner.nextDouble();
-            if (jumlahBayar >= total) break;
+            if (jumlahBayar >= totalSetelahDiskon) break;
             System.out.println("Uang tidak cukup. Masukkan jumlah yang lebih besar.");
         }
 
