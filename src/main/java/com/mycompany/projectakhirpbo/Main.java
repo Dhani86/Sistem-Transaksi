@@ -11,7 +11,10 @@ public class Main {
 
         System.out.print("Masukkan nama pelanggan: ");
         String namaCustomer = scanner.nextLine();
-        customer = new Customer(namaCustomer);
+        
+        System.out.print("Apakah pelanggan member? (y/n): ");
+        boolean isMember = scanner.nextLine().equalsIgnoreCase("y");
+        customer = new Customer(namaCustomer, isMember);
 
         Transaction transaction = new Transaction(customer);
 
@@ -35,9 +38,17 @@ public class Main {
             if (!pilihan.equalsIgnoreCase("y")) break;
         }
 
-        // Total
-        double total = transaction.getTotal();
-        System.out.printf("\nTotal belanja: Rp%.2f\n", total);
+        double total = transaction.getTotal();                       //<<Hitung Total
+        double diskon = 0;
+        if (customer.isMember()) {
+            diskon = total * 0.1;
+            System.out.printf("Diskon member 10%%: -Rp%.2f\n", diskon);
+        }
+        transaction.setDiskon(diskon);
+        
+        double totalSetelahDiskon = total - diskon;
+            System.out.printf("Total: Rp%.2f\n", totalSetelahDiskon);
+        
 
         double jumlahBayar;
         while (true) {
